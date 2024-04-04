@@ -3,11 +3,13 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import java.awt.GridLayout;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JToolTip;
 
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
 
@@ -55,6 +57,32 @@ public class gui {
 		frame.getContentPane().add(btnNewButton);
 		btnNewButton.setToolTipText("Select project to be analysed");
 		
+		btnNewButton.addActionListener(
+				
+					new ActionListener()
+					{
+						
+						public void actionPerformed(ActionEvent e)
+						{
+							
+							JFileChooser fc = new JFileChooser("Select the project's folder");
+							
+							int val = fc.showOpenDialog(null);
+							
+							if (val==JFileChooser.APPROVE_OPTION)
+							{
+								File fisier = fc.getSelectedFile();
+								
+								textField.setText(fisier.getAbsolutePath());
+								
+							}
+							
+						}
+						
+					}
+				
+				);
+		
 		
 		JLabel lblNewLabel = new JLabel("Database");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 22));
@@ -66,6 +94,7 @@ public class gui {
 		frame.getContentPane().add(textField);
 		textField.setColumns(10);
 		textField.setToolTipText("Path to project");
+		textField.setEditable(false);
 		
 		
 		JLabel lblNewLabel_1 = new JLabel("Project to analyse");
@@ -78,12 +107,43 @@ public class gui {
 		textField_1.setBounds(260, 176, 224, 52);
 		frame.getContentPane().add(textField_1);
 		textField_1.setToolTipText("Path to database");
+		textField_1.setEditable(false);
 		
 		JButton btnNewButton_1 = new JButton("LOAD");
 		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnNewButton_1.setBounds(535, 176, 129, 52);
 		frame.getContentPane().add(btnNewButton_1);
 		btnNewButton_1.setToolTipText("Select DB to be overwritten");
+		
+		
+		btnNewButton_1.addActionListener(
+				
+				new ActionListener()
+				{
+					
+					public void actionPerformed(ActionEvent e)
+					{
+						
+						JFileChooser fc = new JFileChooser("Select the Excel DataBase");
+						
+						int val = fc.showOpenDialog(null);
+						
+						if (val==JFileChooser.APPROVE_OPTION)
+						{
+							File fisier = fc.getSelectedFile();
+							
+							textField_1.setText(fisier.getAbsolutePath());
+							
+						}
+						
+					}
+					
+				}
+			
+			);
+		
+		
+		
 		
 		JButton btnProjectAnalysis = new JButton("Project Analysis");
 		btnProjectAnalysis.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -97,4 +157,7 @@ public class gui {
 		btnDatabaseExport.setBounds(467, 300, 208, 71);
 		frame.getContentPane().add(btnDatabaseExport);
 	}
+	
+	
+	
 }
